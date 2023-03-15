@@ -12,7 +12,8 @@ const Shop = function () {
         if (coffeeQuantity >= n) {
             coffeeQuantity -= n;
             coffeeSold += n;
-            balance += n * coffeePrice; 
+            balance += n * coffeePrice;
+            console.log('ssssss', balance);
             console.log(`Sold ${n} coffees for a total of ${n * coffeePrice} UAH.`);
         } else {
             console.log(`Not enough coffee in stock to sell ${n} coffees.In stock ${coffeeQuantity} pcs.`);
@@ -23,19 +24,23 @@ const Shop = function () {
         if (balance >= n * coffeePrice) {
             coffeeQuantity += n;
             balance -= n * coffeePrice;
+            console.log('bbbbb', balance);
             console.log(`Bought ${n} coffees for a total cost of ${n * coffeePrice} UAH.`);
-        } else
+            return n * coffeePrice;
+        } else {
             console.log(`Not enough money to buy. Balance ${balance}. Required ${n * coffeePrice}. Must be added ${(n * coffeePrice) - balance} UAH`)
+            throw { name: "NotMoneyError", message: "Not enough money to buy" };
+        }
     }
 
     function sellWater(n) {
         if (waterQuantity >= n) {
             waterQuantity -= n;
             waterSold += n;
-            balance += n * waterPrice; 
+            balance += n * waterPrice;
             console.log(`Sold ${n} waters for a total of ${n * waterPrice} UAH.`);
         } else {
-            console.log(`Not enough water in stock to sell ${n} waters. In stock ${waterQuantity} pcs.` );
+            console.log(`Not enough water in stock to sell ${n} waters. In stock ${waterQuantity} pcs.`);
         }
     }
 
@@ -44,18 +49,19 @@ const Shop = function () {
             waterQuantity += n;
             balance -= n * waterPrice;
             console.log(`Bought ${n} waters for a total cost of ${n * waterPrice} UAH.`);
+            return n * waterPrice;
         } else
             console.log(`Not enough money to buy. Balance ${balance} UAH. Required ${n * waterPrice} UAH. Must be added ${(n * waterPrice) - balance} UAH`)
 
     }
 
     function getCoffeeStock() {
-         console.log(`Coffee quantity ${coffeeQuantity} pcs`);
+        console.log(`Coffee quantity ${coffeeQuantity} pcs`);
         return coffeeQuantity;
     }
 
     function getCoffeeSold() {
-         console.log(`Coffee sold  ${coffeeSold} pcs`)
+        console.log(`Coffee sold  ${coffeeSold} pcs`)
         return coffeeSold;
     }
 
@@ -70,13 +76,16 @@ const Shop = function () {
     }
 
     function getBalance() {
-        return console.log(`Balance is ${balance} UAH.` );
+        console.log(`Balance is ${balance} UAH.`);
+        return balance;
+
     }
 
     function calculateTotal() {
         console.log(`Goods in cash equivalent ${(coffeePrice * coffeeQuantity) + (waterPrice * waterQuantity)} UAH.`)
         return (coffeePrice * coffeeQuantity) + (waterPrice * waterQuantity);
     }
+
 
     return {
         total: calculateTotal,
@@ -94,28 +103,33 @@ const Shop = function () {
 
 const shop = Shop();
 
-shop.getBalance();
-shop.total();
+// shop.getBalance();
+// shop.total();
+// shop.buyCoffee(10);
+// shop.sellCoffee(5);
+// shop.getBalance();
+// shop.getCoffeeStock();
+// shop.buyWater(50)
+
+// shop.getWaterStock();
+// shop.total();
+// shop.getBalance();
 
 
-shop.buyCoffee(30);
-shop.buyWater(50)
-shop.getCoffeeStock();
-shop.getWaterStock();
-shop.total();
-shop.getBalance();
 
+// shop.getCoffeeStock();
+// shop.getCoffeeSold();
 
-shop.sellCoffee(5);
-shop.getCoffeeStock();
-shop.getCoffeeSold();
+// shop.sellWater(10);
+// shop.getWaterStock();
+// shop.getWaterSold();
 
-shop.sellWater(10);
-shop.getWaterStock();
-shop.getWaterSold();
+// shop.total();
+// shop.getBalance();
 
-shop.total();
-shop.getBalance();
+// shop.sellCoffee(500);
+// shop.buyWater(500);
 
-shop.sellCoffee(500);
-shop.buyWater(500);
+//const v = shop.buyCoffee(333);
+//console.log('ddd', v)
+module.exports = Shop;
