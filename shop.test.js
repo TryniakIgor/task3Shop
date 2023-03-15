@@ -4,8 +4,6 @@ let shopInstance;
 
 beforeEach(() => {
     shopInstance = Shop();
-    //shopInstance.balance = 200;
-
 });
 
 describe('should return current balance and stock', () => {
